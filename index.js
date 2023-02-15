@@ -31,3 +31,13 @@ var name9;
 name9 = 123;
 name9 = "123";
 name9 = true;
+// unknown type -> 모든 자료형 허용해줌, any랑 같음
+var name10;
+// unknown 이 any보다 안전한 이유는 다른 변수에 들어가는것도 허락을 해주는지 안해주는지 차이;
+// let bug1 : string = name9;
+// let bug2 : stirng = unknown;
+// function void 타입
+function function2(x) {
+    1 + 1;
+}
+function2();

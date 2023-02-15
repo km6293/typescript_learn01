@@ -7,6 +7,7 @@ let name2: string[] = ["kim", "Lee"];
 let name3: { name: string } = { name: "kim" };
 
 // ? => name이라는 속성이 들어올 수도 있고, 안들어올 수도 있음.
+// 옵셔널 체이닝인듯
 let name4: { name?: string } = {};
 
 // Union Type (타입 2개 이상 합친 새로운 타입만들기) => string 또는 number 들어올 수 있음.
@@ -52,3 +53,33 @@ let name9: any;
 name9 = 123;
 name9 = "123";
 name9 = true;
+
+// unknown type -> 모든 자료형 허용해줌, any랑 같음
+let name10: unknown;
+
+// unknown 이 any보다 안전한 이유는 다른 변수에 들어가는것도 허락을 해주는지 안해주는지 차이;
+// let bug1 : string = name9;
+// let bug2 : stirng = unknown;
+
+// function void 타입
+function function2(x?: number): void {
+  1 + 1;
+}
+function2();
+
+// 변수? : number = 변수 : number | undifined와 같음
+
+// 1. Type Narrowing -> type 이 아직 하나로 확정되지 않은경우 써야됨. ex) typeof, in, instanceof
+function function3(x: number | string) {
+  if (typeof x === "string") {
+    return x + "1";
+  } else {
+    return x + 1;
+  }
+}
+
+// 2. assertion 문법(타입 덮어쓰기)
+function function4(x: number | string) {
+  let array: number[] = [];
+  array[0] = x as number;
+}
