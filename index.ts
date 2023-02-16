@@ -83,3 +83,73 @@ function function4(x: number | string) {
   let array: number[] = [];
   array[0] = x as number;
 }
+
+// type alias
+type AnimalType = { name: string; age: number };
+let animal: AnimalType = { name: "김", age: 20 };
+
+// read Only -> const일지라도 안의 값 변경 가능한것도 막아줄 수 있음.
+type AnimalType2 = { readonly name: string; age: number };
+const animal2: AnimalType2 = { name: "김", age: 20 };
+
+// type 합치기1
+type type1 = string;
+type type2 = number;
+type type3 = string | number;
+
+// type 합치기2 extend
+type type4 = { x: number };
+type type5 = { y: number };
+type type6 = type4 & type5;
+
+// literal types
+let test: "123"; // 123만 들어올 수 있음.
+
+// literal types 문제점
+let test2 = { a: "1" };
+// as const -> object value 값을 그대로 타입으로 지정 , object 속성 모두 read only로 해줌
+let test4 = { a: "1" } as const;
+function test3(b: "1") {}
+// test3(test2.a) // 타입이 아닌 자료가 들어가 있기 때문
+test3(test4.a);
+
+// 함수와 methods에 type alias 지정하는 법
+type FuncType = (a: string) => number;
+// 함수표현식 -> as 쓰기 편함
+let func2: FuncType = function (a) {
+  return 10;
+};
+// 함수선언식
+function func1() {}
+
+// html ============
+let title = document.getElementById("title");
+// narrow 5가지 방법
+// 1
+if (title != null) {
+  title.innerHTML = "ㅎㅇ";
+}
+// 2
+if (title instanceof Element) {
+  title.innerHTML = "ㅎㅇ";
+}
+// 3
+let title2 = document.getElementById("title") as Element;
+
+// 4
+if (title?.innerHTML != undefined) {
+  title.innerHTML = "ㅎㅇ";
+}
+
+// 5 tscofing.json의 null 체크 false
+
+// index link class 수정 -> 각각 상속 다른것들 다 있음 ex) 버튼
+let link = document.querySelector("link");
+if (link instanceof HTMLAnchorElement) {
+  link.href = "kakao.com";
+}
+
+let 버튼 = document.getElementById("button");
+버튼?.addEventListener("click", function () {
+  console.log("안녕");
+});
